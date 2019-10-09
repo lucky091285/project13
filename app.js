@@ -5,6 +5,7 @@ const cardsRoutes = require('./routes/cards');
 const { PORT = 3000, BASE_PATH } = process.env;
 const app = express();
 const path = require('path');
+
 mongoose.connect('mongodb://localhost:27017/mestodb',  {
    useUnifiedTopology: true,
    useNewUrlParser: true,
@@ -22,7 +23,9 @@ app.use((req, res, next) => {
 });
 app.use('/users', usersRoutes);
 app.use('/cards', cardsRoutes);
+
 app.get('*', (req, res) => res.status(404).send({ message: 'Запрашиваемый ресурс не найден' }));
+
 app.listen(PORT, () => {
  console.log('Ссылка на сервер:');
  console.log(BASE_PATH);
